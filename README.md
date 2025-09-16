@@ -1,1 +1,1 @@
-# next-js-course-2025
+# Next JS course 2025
