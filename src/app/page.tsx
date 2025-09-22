@@ -35,8 +35,8 @@ const Home: FC = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="cursor-pointer" />
+            <CarouselNext className="cursor-pointer"/>
           </Carousel>
         </section>
       </div>

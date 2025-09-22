@@ -1,17 +1,27 @@
-"use client";
-
 import { FC } from "react";
-import { useParams } from "next/navigation";
+import { notFound } from 'next/navigation';
 import { getItemById } from "@/db/data";
+import { getFeaturedItems } from "@/db/data";
 
-const Rackets: FC = () => {
-  const params = useParams();
-  const id = Array.isArray(params?.id) ? params.id[0] : params?.id;
+interface RacketPageProps {
+  params: Promise<{ id: string }>
+}
 
-  if (!id) return <div>ID некорректный</div>;
+export async function generateStaticParams() {
+  const topRackets = getFeaturedItems();;
+
+  return topRackets.map((racket) => ({
+    id: String(racket.id),
+  }))
+}
+
+const Racket: FC<RacketPageProps> = async ({ params }) => {
+  const { id } = await params;
+
+  if (!id) return notFound();
 
   const itemData = getItemById(id);
-  if (!itemData) return <div>Элемент не найден</div>;
+  if (!itemData) return notFound();
 
   return (
     <div className="w-full flex justify-center items-center h-full">
@@ -34,4 +44,4 @@ const Rackets: FC = () => {
   );
 }
 
-export default Rackets;
+export default Racket;
