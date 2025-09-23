@@ -10,8 +10,8 @@ const ThemeSwitcher: FC = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <Button className="cursor-pointer" onClick={toggleTheme}>
-      {theme === "light" ? <Moon /> : <Sun />}
+    <Button onClick={toggleTheme}>
+      {theme === "light" ? <Moon strokeWidth={1} /> : <Sun strokeWidth={1} />}
     </Button>
   );
 }

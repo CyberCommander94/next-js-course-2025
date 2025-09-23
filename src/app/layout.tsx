@@ -2,7 +2,7 @@ import "@/assets/styles/globals.css";
 import { FC } from "react";
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
-
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 const RootLayout: FC<Readonly<{children: React.ReactNode;}>
 > = ({ children }) => {
@@ -14,6 +14,7 @@ const RootLayout: FC<Readonly<{children: React.ReactNode;}>
           {children}
         </main>
         <AppFooter />
+        <ScrollToTopButton />
       </body>
     </html>
   );

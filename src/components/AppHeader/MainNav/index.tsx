@@ -6,11 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import MenuItemsData from "@/config/main-menu"
 
@@ -21,23 +19,10 @@ const MainNav: FC = () => {
     return menuItems.map((item) => {
       const isActive = pathname === item.href;
 
-      if (item.children && item.children.length > 0) {
-        return (
-          <NavigationMenuItem key={item.id}>
-            <NavigationMenuTrigger className={`${isActive ? 'bg-background text-foreground' : 'text-background'}`}>{item.title}</NavigationMenuTrigger>
-            <NavigationMenuContent className="list-none">
-              <div className="flex flex-col space-y-1 p-2">
-                {renderMenuItems(item.children)}
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        )
-      }
-
       return (
         <NavigationMenuItem key={item.id}>
-          <NavigationMenuLink asChild>
-            <Link href={item.href} className={`${isActive ? 'bg-background font-light text-foreground' : 'font-light text-background'}`}>{item.title}</Link>
+          <NavigationMenuLink asChild active={isActive}>
+            <Link href={item.href}>{item.title}</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       )
