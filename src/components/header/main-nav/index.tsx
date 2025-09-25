@@ -1,7 +1,7 @@
 "use client"
 
 import { FC, useMemo, useCallback } from "react";
-import type { MenuItem } from "@/types/main-menu";
+import type { IMenuItem } from "@/types/main-menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -15,7 +15,7 @@ import MenuItemsData from "@/config/main-menu"
 const MainNav: FC = () => {
   const pathname = usePathname();
 
-  const renderMenuItems = useCallback((menuItems: MenuItem[]) => {
+  const renderMenuItems = useCallback((menuItems: IMenuItem[]) => {
     return menuItems.map((item) => {
       const isActive = pathname === item.href;
 
