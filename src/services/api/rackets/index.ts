@@ -20,11 +20,13 @@ export const getTop10Rackets = async () => {
 type getRacketsParams = {
   page?: number;
   limit?: number;
+  brand?: string;
 }
 
 export const getRackets = async ({
   page = 1,
   limit = 2,
+  brand
 }: getRacketsParams): Promise<IResponse<IRacket[]>> => {
   const res = await request({
     endpoint: "/products",
@@ -32,6 +34,7 @@ export const getRackets = async ({
     params: {
       page,
       limit,
+      ...(brand ? { brand } : {}),
     }
   });
 

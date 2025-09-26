@@ -1,23 +1,36 @@
 "use client";
 
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { setThemeCookie } from "@/lib/actions";
+import type { Theme } from "@/types/theme";
 
-export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+export const ThemeContext = React.createContext<{
+  theme: Theme;
+  toggleTheme: () => void;
+}>({
+  theme: "light",
+  toggleTheme: () => {},
+});
+
+export default function ThemeProvider({
+  children,
+  initialTheme,
+}: {
+  children: React.ReactNode;
+  initialTheme: Theme;
+}) {
+  const [theme, setTheme] = useState<Theme>(initialTheme);
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as "light" | "dark" | null;
-    if (stored) {
-      setTheme(stored);
-      document.documentElement.classList.toggle("dark", stored === "dark");
-    }
-  }, []);
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+
+    await setThemeCookie(newTheme);
+
     document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
 
@@ -27,11 +40,3 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     </ThemeContext.Provider>
   );
 }
-
-export const ThemeContext = React.createContext<{
-  theme: "light" | "dark";
-  toggleTheme: () => void;
-}>({
-  theme: "light",
-  toggleTheme: () => {},
-});
