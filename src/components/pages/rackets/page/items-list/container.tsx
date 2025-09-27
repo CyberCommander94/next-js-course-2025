@@ -1,7 +1,6 @@
 import { FC } from "react";
 import RacketsPageList from "@/components/pages/rackets/page/items-list";
 import { getRackets } from "@/services/api/rackets";
-import { notFound } from 'next/navigation';
 
 type Props = {
   currentBrand: string;
@@ -21,7 +20,7 @@ const RacketsPageListContainer: FC<Props> = async ({ currentBrand }) => {
   }
 
   if (!data) {
-    return notFound();
+    return null
   }
 
   return <RacketsPageList rackets={data} />;

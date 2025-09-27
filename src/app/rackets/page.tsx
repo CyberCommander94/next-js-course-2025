@@ -3,10 +3,16 @@ import RacketsPageListLoader from "@/components/pages/rackets/page/items-list/lo
 import RacketsPageListContainer from "@/components/pages/rackets/page/items-list/container";
 import RacketsPageToolbarLoader from "@/components/pages/rackets/page/toolbar/loader";
 import RacketsPageToolbarContainer from "@/components/pages/rackets/page/toolbar/container";
+import { Metadata } from "next";
 
 type Props = {
   searchParams: SearchParams;
 }
+
+export const metadata: Metadata = {
+  title: "Tennis shop: Ракетки",
+  description: "Список всех ракеток магазина Tennis shop",
+};
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
 

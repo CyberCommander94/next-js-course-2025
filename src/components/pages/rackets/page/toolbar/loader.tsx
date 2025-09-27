@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const RacketsPageToolbarLoader: FC = () => {
   return (
-    <div className="flex justify-end w-full">
+    <div className="flex justify-end w-full mb-2">
       <Skeleton className="h-[30px] w-[180px] bg-gray-200 dark:bg-accent rounded-none" />
     </div>
   );

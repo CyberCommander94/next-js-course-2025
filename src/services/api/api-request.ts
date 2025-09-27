@@ -8,6 +8,7 @@ interface RequestOptions<TBody = unknown> {
   params?: Record<string, string | number | boolean>;
   body?: TBody;
   headers?: Record<string, string>;
+  next?: NextFetchRequestConfig;
 }
 
 export async function request<TBody = unknown>(

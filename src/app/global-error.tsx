@@ -7,7 +7,7 @@ type Props = {
   reset: () => void;
 };
 
-const Error: FC<Props> = ({ error, reset }) => {
+const GlobalError: FC<Props> = ({ error, reset }) => {
   return (
     <html>
       <body className="w-screen h-screen flex flex-col items-center justify-center bg-background text-foreground">
@@ -26,4 +26,4 @@ const Error: FC<Props> = ({ error, reset }) => {
   );
 }
 
-export default Error;
+export default GlobalError;
