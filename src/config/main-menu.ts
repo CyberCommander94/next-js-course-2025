@@ -1,6 +1,6 @@
-import type { MenuItem } from "@/types/main-menu";
+import type { IMenuItem } from "@/types/main-menu";
 
-const MenuItemsData: MenuItem[] = [
+const MenuItemsData: IMenuItem[] = [
   {
     id: 'home',
     title: "Главная",
@@ -10,6 +10,11 @@ const MenuItemsData: MenuItem[] = [
     id: 'rackets',
     title: "Ракетки",
     href: "/rackets",
+  },
+  {
+    id: 'top10',
+    title: "Топ 10",
+    href: "/top-10",
   },
 ]
 

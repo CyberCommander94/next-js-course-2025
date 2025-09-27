@@ -1,4 +1,4 @@
-export type ShopItem = {
+export interface IRacket {
     id: string | number;
     name: string;
     imageUrl: string;
