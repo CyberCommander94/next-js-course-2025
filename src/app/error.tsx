@@ -1,17 +1,26 @@
-"use client"
+"use client";
 
 import { FC } from "react";
 
-const Error: FC = () => {
+type Props = {
+  error: Error & { digest?: string };
+  reset: () => void;
+};
+
+const Error: FC<Props> = ({ error, reset }) => {
   return (
-    <div className="w-full flex justify-center items-center h-full">
-      <div className="flex flex-col items-center w-full h-full lg:w-9/12 py-5 px-6 lg:px-0">
-        <section className="flex flex-col justify-center items-center w-full h-full text-center">
-          <h2 className="text-2xl md:text-4xl 2xl:text-6xl">Упс. Что-то пошло не так...</h2>
-          <h2 className="font-light text-base md:text-2xl 2xl:text-3xl mt-3 md:mt-5 2xl:mt-7">непредвиденная ошибка работы приложения</h2>
-        </section>
-      </div>
-    </div>
+    <section className="w-full h-full flex flex-col items-center justify-center bg-background text-foreground">
+      <h2 className="text-4xl mb-4 font-light">Упс. Что-то пошло не так...</h2>
+      <p className="mb-6 font-light">
+        Пожалуйста, попробуйте обновить страницу или вернуться позже.
+      </p>
+      <button
+        onClick={() => reset()}
+        className="cursor-pointer font-light px-4 py-2 border border-foreground dark:border-input/50 bg-transparent hover:bg-foreground dark:hover:bg-input/30 text-foreground hover:text-background dark:hover:text-foreground"
+      >
+        Попробовать снова
+      </button>
+    </section>
   );
 }
 

@@ -6,6 +6,10 @@ export const getTop10Rackets = async () => {
   const res = await request({
     endpoint: "/top-10",
     method: "GET",
+    next: {
+      revalidate: 15,
+      tags: ["getTop10Rackets"],
+    }
   });
 
   if (!res.ok) {
