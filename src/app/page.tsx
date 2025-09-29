@@ -6,8 +6,6 @@ import HomePageRacketsListLoader from "@/components/pages/home/home-page-rackets
 import HomePageRacketsListContainer from "@/components/pages/home/home-page-rackets-list/container"
 
 const Home: FC = async () => {
-  // throw new Error("Ошибка загрузки данных");
-
   return (
     <div className="w-full flex justify-center items-center h-full">
       <div className="flex flex-col items-center w-full h-full lg:w-9/12 py-4 px-6 lg:px-0 gap-4">
