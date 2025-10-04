@@ -14,7 +14,7 @@ const MenuItemsData: IMenuItem[] = [
   {
     id: 'top10',
     title: "Топ 10",
-    href: "/top-10",
+    href: "/rackets/top-10",
   },
 ]
 

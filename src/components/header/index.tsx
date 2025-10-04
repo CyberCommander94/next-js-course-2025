@@ -1,18 +1,29 @@
-import { FC } from "react";
+"use client"
+
+import { FC, use } from "react";
 import ThemeProvider from "@/providers/theme";
 import ThemeSwitcher from "@/components/header/theme-switcher";
 import MainNav from "@/components/header/main-nav";
+import LoginButton from "@/components/header/auth-buttons/login-button";
+import LogoutButton from "@/components/header/auth-buttons/logout-button";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link";
 import type { Theme } from "@/types/theme";
-
+import { UserContext } from '@/providers/user';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 type AppHeaderProps = {
   initialTheme: Theme;
 };
 
 const AppHeader: FC<AppHeaderProps> = ({ initialTheme }) => {
+  const { user } = use(UserContext);
+
   return (
     <header className="w-full flex flex-col justify-center items-center">
       <div className="w-full flex justify-center items-center bg-background">
@@ -26,10 +37,18 @@ const AppHeader: FC<AppHeaderProps> = ({ initialTheme }) => {
             <ThemeProvider initialTheme={initialTheme}>
               <ThemeSwitcher />
             </ThemeProvider>
-            <Button variant="destructive">
-              <ShoppingCart strokeWidth={1} />
-              <span>€0</span>
-            </Button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="destructive">
+                  <ShoppingCart strokeWidth={1} />
+                  <span>€0</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Корзина</p>
+              </TooltipContent>
+            </Tooltip>
+            {user ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
       </div>

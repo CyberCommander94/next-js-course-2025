@@ -1,11 +1,11 @@
-import { request } from '@/services/api/api-request'
 import type { IRacket } from '@/types/shop-item';
 import type { IResponse } from '@/types/api';
+import { API_BASE_URL } from "@/constants"
 
 export const getTop10Rackets = async () => {
-  const res = await request({
-    endpoint: "/top-10",
+  const res = await fetch(`${API_BASE_URL}/top-10`, {
     method: "GET",
+    headers: { "Content-Type": "application/json" },
     next: {
       revalidate: 15,
       tags: ["getTop10Rackets"],
@@ -32,14 +32,15 @@ export const getRackets = async ({
   limit = 2,
   brand
 }: getRacketsParams): Promise<IResponse<IRacket[]>> => {
-  const res = await request({
-    endpoint: "/products",
+  const query = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+    ...(brand ? { brand } : {})
+  });
+
+  const res = await fetch(`${API_BASE_URL}/products?${query.toString()}`, {
     method: "GET",
-    params: {
-      page,
-      limit,
-      ...(brand ? { brand } : {}),
-    }
+    headers: { "Content-Type": "application/json" },
   });
 
   if (!res.ok) {
@@ -52,9 +53,9 @@ export const getRackets = async ({
 };
 
 export const getRacketById = async (id: string): Promise<IResponse<IRacket>> => {
-    const res = await request({
-    endpoint: `/product/${id}`,
+  const res = await fetch(`${API_BASE_URL}/product/${id}`, {
     method: "GET",
+    headers: { "Content-Type": "application/json" }
   });
 
   if (res.status === 404) {

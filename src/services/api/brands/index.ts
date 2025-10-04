@@ -1,10 +1,10 @@
-import { request } from '@/services/api/api-request'
 import type { Brand } from "@/types/shop-item"
+import { API_BASE_URL } from "@/constants"
 
 export const getBrandsList = async () => {
-  const res = await request({
-    endpoint: "/brands",
+  const res = await fetch(`${API_BASE_URL}/brands`, {
     method: "GET",
+    headers: { "Content-Type": "application/json" }
   });
 
   if (!res.ok) {
