@@ -3,22 +3,28 @@
 import { IRacket } from "@/types/shop-item";
 import { FC, use } from "react";
 import { UserContext } from '@/providers/user';
-import { Bookmark } from "lucide-react";
+import FavoriteButton from "@/components/favorite-button";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-// import { toast } from "sonner"
+  useHydrateFavorite,
+  useIsFavoriteById,
+} from "@/providers/favorite/hooks";
 
 type Props = {
   data: IRacket;
 }
 
 const RacketPageContent: FC<Props> = ({ data }) => {
-  const { user } = use(UserContext);
+  const { isAuthorized } = use(UserContext);
 
-  // toast("Продукт добавлен в избранные");
+  useHydrateFavorite({
+    racketId: data.id,
+    isFavorite: Boolean(data.userData?.isFavorite),
+  });
+
+  const isFavoriteGlobal = useIsFavoriteById({
+    id: data.id,
+    isFavoriteInitial: Boolean(data.userData?.isFavorite),
+  });
 
   return (
     <div className="w-full h-full flex justify-center">
@@ -30,14 +36,7 @@ const RacketPageContent: FC<Props> = ({ data }) => {
           <div className="flex justify-between items-center w-full gap-3">
             <div className="flex gap-3 items-center">
               <p className="text-2xl font-medium">{data.name}</p>
-              { user && 
-                <Tooltip>
-                  <TooltipTrigger asChild><Bookmark strokeWidth={1} size={20} color="#e7000b" className="cursor-pointer" /></TooltipTrigger>
-                  <TooltipContent>
-                    <p>Добавить в избранное</p>
-                  </TooltipContent>
-                </Tooltip>
-              }
+              { isAuthorized && <FavoriteButton isFavorite={isFavoriteGlobal} productId={data.id} buttonClasses={""} iconSize={24} /> }
             </div>
             <p className="text-2xl border border-destructive bg-transparent text-destructive px-2 py-1">€{data.price}</p>
           </div>

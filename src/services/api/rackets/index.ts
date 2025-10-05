@@ -1,13 +1,17 @@
 import type { IRacket } from '@/types/shop-item';
 import type { IResponse } from '@/types/api';
 import { API_BASE_URL } from "@/constants"
+import { cookies } from "next/headers";
 
 export const getTop10Rackets = async () => {
+  const cookieStore = await cookies();
+
   const res = await fetch(`${API_BASE_URL}/top-10`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
     next: {
-      revalidate: 15,
       tags: ["getTop10Rackets"],
     }
   });
@@ -32,6 +36,8 @@ export const getRackets = async ({
   limit = 2,
   brand
 }: getRacketsParams): Promise<IResponse<IRacket[]>> => {
+  const cookieStore = await cookies();
+
   const query = new URLSearchParams({
     page: String(page),
     limit: String(limit),
@@ -40,7 +46,12 @@ export const getRackets = async ({
 
   const res = await fetch(`${API_BASE_URL}/products?${query.toString()}`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+    next: {
+      tags: ["getRackets"],
+    }
   });
 
   if (!res.ok) {
@@ -52,10 +63,15 @@ export const getRackets = async ({
   return { isError: false, data };
 };
 
-export const getRacketById = async (id: string): Promise<IResponse<IRacket>> => {
+export const getRacketById = async (id: string, credentials?: RequestCredentials): Promise<IResponse<IRacket>> => {
+  const cookieStore = await cookies();
+
   const res = await fetch(`${API_BASE_URL}/product/${id}`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" }
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+    ...(credentials ? { credentials } : {})
   });
 
   if (res.status === 404) {

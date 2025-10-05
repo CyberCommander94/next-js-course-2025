@@ -9,7 +9,7 @@ type Props = {
 
 const Error: FC<Props> = ({ error, reset }) => {
   return (
-    <section className="w-full h-full flex flex-col items-center justify-center bg-background text-foreground">
+    <section className="w-full h-screen flex flex-col items-center justify-center bg-background text-foreground">
       <h2 className="text-4xl mb-4 font-light">Упс. Что-то пошло не так...</h2>
       <p className="mb-6 font-light">
         Пожалуйста, попробуйте обновить страницу или вернуться позже.

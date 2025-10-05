@@ -4,15 +4,14 @@ import { IUser } from "@/types/user";
 import { createContext, FC, PropsWithChildren } from "react";
 
 interface UserContextType {
-  user: IUser | undefined;
+  isAuthorized: IUser | undefined;
 }
-export const UserContext = createContext<UserContextType>({ user: undefined });
+export const UserContext = createContext<UserContextType>({ isAuthorized: undefined });
 
 interface Props extends PropsWithChildren {
-  user: IUser | undefined;
+  isAuthorized: IUser | undefined;
 }
 
-export const UserProvider: FC<Props> = ({ user, children }) => {
-  // console.dir(user);
-  return <UserContext value={{ user }}>{children}</UserContext>;
+export const UserProvider: FC<Props> = ({ isAuthorized, children }) => {
+  return <UserContext value={{ isAuthorized }}>{children}</UserContext>;
 };

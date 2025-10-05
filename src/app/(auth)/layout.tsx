@@ -3,6 +3,7 @@ import { UserProvider } from "@/providers/user";
 import { FC, PropsWithChildren } from "react";
 import Layout from "@/components/layout";
 import { cookies } from "next/headers";
+import { FavoriteProvider } from "@/providers/favorite";
 
 const AppLayout: FC<PropsWithChildren> = async ({ children }) => {
   const { data } = await getUser();
@@ -10,8 +11,10 @@ const AppLayout: FC<PropsWithChildren> = async ({ children }) => {
   const theme = cookieStore.get("theme")?.value === "dark" ? "dark" : "light";
 
   return (
-    <UserProvider user={data}>
-      <Layout initialTheme={theme}>{children}</Layout>
+    <UserProvider isAuthorized={data}>
+      <FavoriteProvider>
+        <Layout initialTheme={theme}>{children}</Layout>
+      </FavoriteProvider>
     </UserProvider>
   );
 };

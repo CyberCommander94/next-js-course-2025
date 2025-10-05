@@ -3,36 +3,36 @@
 import { FC, use } from "react";
 import type { IRacket } from "@/types/shop-item";
 import Link from "next/link";
-import { Bookmark } from "lucide-react";
 import { UserContext } from '@/providers/user';
+import FavoriteButton from "../favorite-button";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-// import { toast } from "sonner"
+  useHydrateFavorite,
+  useIsFavoriteById,
+} from "@/providers/favorite/hooks";
 
 type ProductCardProps = {
   product: IRacket;
   url: string;
 };
 
-const ProductCard: FC<ProductCardProps> = ({ product, url }) => {
-  const { user } = use(UserContext);
 
-  // toast("Продукт добавлен в избранные");
+const ProductCard: FC<ProductCardProps> = ({ product, url }) => {
+  const { isAuthorized } = use(UserContext);
+
+  useHydrateFavorite({
+    racketId: product.id,
+    isFavorite: Boolean(product.userData?.isFavorite),
+  });
+
+  const isFavoriteGlobal = useIsFavoriteById({
+    id: product.id,
+    isFavoriteInitial: Boolean(product.userData?.isFavorite),
+  });
 
   return (
     <article className="grid grid-rows-1 h-full w-full relative pb-[60px] box-border outline-foreground outline-1 bg-white hover:outline-3">
       <div className="w-full h-full py-2 relative">
-        { user && 
-          <Tooltip >
-            <TooltipTrigger className="absolute top-2 right-2" asChild><Bookmark strokeWidth={1} size={20} color="#e7000b" className="cursor-pointer" /></TooltipTrigger>
-            <TooltipContent>
-              <p>Добавить в избранное</p>
-            </TooltipContent>
-          </Tooltip>
-        }
+        { isAuthorized && <FavoriteButton isFavorite={isFavoriteGlobal} productId={product.id} buttonClasses={"absolute top-2 right-2"} iconSize={20} /> }
         <Link href={url} className="max-h-[250px] h-full flex justify-center items-center">
           <img src={product.imageUrl} alt={product.name} className="h-full w-auto object-contain"/>
         </Link>

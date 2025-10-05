@@ -4,7 +4,10 @@ import { getRackets } from "@/services/api/rackets";
 
 
 const HomePageRacketsListContainer: FC = async () => {
-  const { data, isError } = await getRackets({ page: 1, limit: 12});
+  const { data, isError } = await getRackets({
+    page: 1,
+    limit: 12,
+  });
 
   if (!data) {
     return null;

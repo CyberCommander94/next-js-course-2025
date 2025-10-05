@@ -1,9 +1,10 @@
+
 import { FC } from "react";
-import { notFound } from 'next/navigation';
 import { getRacketById } from "@/services/api/rackets";
 import { getMetaRacketById } from "@/services/api/meta/rackets";
 import { Metadata } from "next";
-import RacketPageContent from "@/components/pages/racket";
+import { RacketContainer } from "@/components/pages/racket/container";
+import { SWRConfig } from "swr";
 
 interface RacketPageProps {
   params: Promise<{ id: string }>
@@ -31,20 +32,19 @@ export const generateMetadata = async ({
 const Racket: FC<RacketPageProps> = async ({ params }) => {
   const { id } = await params;
 
-  const { data: metaData } = await getMetaRacketById(id);
-
-  if (!id || !metaData) return notFound();
-
-  const { data, isError } = await getRacketById(id);
-
-  if (!data && !isError) return notFound();
-
-  if (isError) {
-    throw new Error("Ошибка загрузки данных");
-  }
+  const { data } = await getRacketById(id, "include");
 
   return (
-    <RacketPageContent data={data} />
+    <SWRConfig
+      value={{
+        fallback: {
+          [`product/${id}`]: data,
+        },
+        revalidateOnFocus: false,
+      }}
+    >
+      <RacketContainer productId={id} />
+    </SWRConfig>
   );
 }
 

@@ -22,7 +22,7 @@ type AppHeaderProps = {
 };
 
 const AppHeader: FC<AppHeaderProps> = ({ initialTheme }) => {
-  const { user } = use(UserContext);
+  const { isAuthorized } = use(UserContext);
 
   return (
     <header className="w-full flex flex-col justify-center items-center">
@@ -48,7 +48,7 @@ const AppHeader: FC<AppHeaderProps> = ({ initialTheme }) => {
                 <p>Корзина</p>
               </TooltipContent>
             </Tooltip>
-            {user ? <LogoutButton /> : <LoginButton />}
+            {isAuthorized ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
       </div>
