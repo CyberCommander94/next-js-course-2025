@@ -6,6 +6,7 @@ import { UserContext } from '@/providers/user';
 import FavoriteButton from '@/components/favorite-button';
 import Image from 'next/image';
 import { useHydrateFavorite, useIsFavoriteById } from '@/providers/favorite/hooks';
+import placeholderImg from '@/assets/images/placeholder.png';
 
 type Props = {
   data: IRacket;
@@ -29,7 +30,7 @@ const RacketPageContent: FC<Props> = ({ data }) => {
       <div className="flex flex-col md:flex-row gap-8 lg:gap-12 w-full h-full lg:w-9/12 px-6 lg:px-0 py-4 md:py-10">
         <section className="w-full flex justify-center items-start">
           <Image
-            src={data.imageUrl}
+            src={data.imageUrl || placeholderImg}
             alt={data.name}
             width={400}
             height={400}

@@ -7,6 +7,7 @@ import { UserContext } from '@/providers/user';
 import FavoriteButton from '@/components/favorite-button';
 import Image from 'next/image';
 import { useHydrateFavorite, useIsFavoriteById } from '@/providers/favorite/hooks';
+import placeholderImg from '@/assets/images/placeholder.png';
 
 type ProductCardProps = {
   product: IRacket;
@@ -37,9 +38,9 @@ const ProductCard: FC<ProductCardProps> = ({ product, url }) => {
             iconSize={20}
           />
         )}
-        <Link href={url} className="max-h-[250px] h-full w-full flex justify-center items-center">
+        <Link href={url} className="max-h-[250px] min-h-[250px] h-full w-full flex justify-center items-center">
           <Image
-            src={product.imageUrl}
+            src={product.imageUrl || placeholderImg}
             alt={product.name}
             width={300}
             height={300}
