@@ -8,10 +8,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.json({ message: 'forbidden' }, { status: 403 });
   }
 
-  if (
-    request.nextUrl.pathname.startsWith('/403')
-    && !request.headers.get('x-middleware-auth')
-  ) {
+  if (request.nextUrl.pathname.startsWith('/403') && !request.headers.get('x-middleware-auth')) {
     return NextResponse.json({ message: 'not-found' }, { status: 404 });
   }
 }

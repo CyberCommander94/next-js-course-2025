@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { FC } from "react";
+import { FC } from 'react';
 
 type Props = {
   error: Error & { digest?: string };
   reset: () => void;
 };
 
-const GlobalError: FC<Props> = ({ error, reset }) => {
+const GlobalError: FC<Props> = ({ reset }) => {
   return (
     <html>
       <body className="w-screen h-screen flex flex-col items-center justify-center bg-background text-foreground">
@@ -24,6 +24,6 @@ const GlobalError: FC<Props> = ({ error, reset }) => {
       </body>
     </html>
   );
-}
+};
 
 export default GlobalError;

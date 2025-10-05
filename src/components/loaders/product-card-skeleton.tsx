@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Skeleton } from "@/components/ui/skeleton"
+import { FC } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const ProductCardSkeleton: FC = () => {
   return (
@@ -14,6 +14,6 @@ const ProductCardSkeleton: FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default ProductCardSkeleton;

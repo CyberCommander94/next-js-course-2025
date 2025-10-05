@@ -1,21 +1,17 @@
-"use client";
+'use client';
 
-import { FC } from "react";
-import { Button } from "@/components/ui/button"
+import { FC } from 'react';
+import { Button } from '@/components/ui/button';
 import { LogIn } from 'lucide-react';
-import { useRouter } from "next/navigation";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { useRouter } from 'next/navigation';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 const LoginButton: FC = () => {
   const router = useRouter();
 
   const handleClick = () => {
     router.push(`/login`);
-  }
+  };
 
   return (
     <Tooltip>
@@ -29,6 +25,6 @@ const LoginButton: FC = () => {
       </TooltipContent>
     </Tooltip>
   );
-}
+};
 
 export default LoginButton;

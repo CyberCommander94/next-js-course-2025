@@ -1,11 +1,11 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
+import { cookies } from 'next/headers';
 
-export async function setThemeCookie(theme: "light" | "dark") {
+export async function setThemeCookie(theme: 'light' | 'dark') {
   const store = await cookies();
-  store.set("theme", theme, {
-    path: "/",
+  store.set('theme', theme, {
+    path: '/',
     maxAge: 60 * 60 * 24 * 365,
   });
 }

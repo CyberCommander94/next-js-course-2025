@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { setThemeCookie } from "@/server-actions/theme";
-import type { Theme } from "@/types/theme";
+import React, { useEffect, useState } from 'react';
+import { setThemeCookie } from '@/server-actions/theme';
+import type { Theme } from '@/types/theme';
 
 export const ThemeContext = React.createContext<{
   theme: Theme;
   toggleTheme: () => void;
 }>({
-  theme: "light",
+  theme: 'light',
   toggleTheme: () => {},
 });
 
@@ -22,21 +22,17 @@ export default function ThemeProvider({
   const [theme, setTheme] = useState<Theme>(initialTheme);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   const toggleTheme = async () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+    const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
 
     await setThemeCookie(newTheme);
 
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }

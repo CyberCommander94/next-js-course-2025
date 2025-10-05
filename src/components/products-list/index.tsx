@@ -1,6 +1,6 @@
-import { FC } from "react";
-import type { IRacket } from "@/types/shop-item";
-import ProductCard from "@/components/product-card";
+import { FC } from 'react';
+import type { IRacket } from '@/types/shop-item';
+import ProductCard from '@/components/product-card';
 
 type ProductsListProps = {
   products: IRacket[];
@@ -16,6 +16,6 @@ const ItemsList: FC<ProductsListProps> = ({ products }) => {
       </div>
     </section>
   );
-}
+};
 
 export default ItemsList;

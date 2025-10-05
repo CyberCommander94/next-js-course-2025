@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { FC } from "react";
+import { FC } from 'react';
 
 type Props = {
   error: Error & { digest?: string };
   reset: () => void;
 };
 
-const Error: FC<Props> = ({ error, reset }) => {
+const Error: FC<Props> = ({ reset }) => {
   return (
     <section className="w-full h-screen flex flex-col items-center justify-center bg-background text-foreground">
       <h2 className="text-4xl mb-4 font-light">Упс. Что-то пошло не так...</h2>
@@ -22,6 +22,6 @@ const Error: FC<Props> = ({ error, reset }) => {
       </button>
     </section>
   );
-}
+};
 
 export default Error;

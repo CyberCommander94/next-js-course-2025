@@ -1,18 +1,17 @@
-import { API_BASE_URL } from "@/constants"
-
+import { API_BASE_URL } from '@/constants';
 
 export const addToFavorite = async (productId: string | number, headers?: HeadersInit) => {
   await fetch(`${API_BASE_URL}/product/${productId}/favorite`, {
-    method: "POST",
+    method: 'POST',
     credentials: 'include',
-    ...(headers ? { headers } : {})
+    ...(headers ? { headers } : {}),
   });
 };
 
 export const deleteFromFavorite = async (productId: string | number, headers?: HeadersInit) => {
   await fetch(`${API_BASE_URL}/product/${productId}/favorite`, {
-    method: "DELETE",
+    method: 'DELETE',
     credentials: 'include',
-    ...(headers ? { headers } : {})
+    ...(headers ? { headers } : {}),
   });
 };

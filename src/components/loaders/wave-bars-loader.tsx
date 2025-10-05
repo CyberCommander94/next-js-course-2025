@@ -1,14 +1,14 @@
-import { FC } from "react";
-import { Skeleton } from "@/components/ui/skeleton"
-import { cn } from "@/lib/utils"
+import { FC } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/utils';
 
 type WaveBarsLoaderProps = {
   className?: string;
 };
 
-const WaveBarsLoader: FC<WaveBarsLoaderProps> = ({className}) => {
+const WaveBarsLoader: FC<WaveBarsLoaderProps> = ({ className }) => {
   return (
-    <section className={cn("w-full flex justify-center items-center", className)}>
+    <section className={cn('w-full flex justify-center items-center', className)}>
       <div className="flex gap-2 justify-center items-end h-12">
         {Array.from({ length: 5 }).map((_, idx) => (
           <Skeleton
@@ -19,6 +19,6 @@ const WaveBarsLoader: FC<WaveBarsLoaderProps> = ({className}) => {
       </div>
     </section>
   );
-}
+};
 
 export default WaveBarsLoader;

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { IUser } from "@/types/user";
-import { createContext, FC, PropsWithChildren } from "react";
+import { IUser } from '@/types/user';
+import { createContext, FC, PropsWithChildren } from 'react';
 
 interface UserContextType {
   isAuthorized: IUser | undefined;

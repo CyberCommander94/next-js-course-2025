@@ -1,21 +1,15 @@
-"use client";
+'use client';
 
-import { IRacket } from "@/types/shop-item";
-import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  useCallback,
-  useState,
-} from "react";
+import { IRacket } from '@/types/shop-item';
+import { createContext, FC, PropsWithChildren, useCallback, useState } from 'react';
 
 type SetFavotiteParams = {
-  id: IRacket["id"];
+  id: IRacket['id'];
   isFavorite: boolean;
 };
 
 interface FavoriteContextType {
-  favorites: Record<IRacket["id"], boolean>;
+  favorites: Record<IRacket['id'], boolean>;
   setFavorite: (params: SetFavotiteParams) => void;
 }
 
@@ -25,9 +19,7 @@ export const FavoriteContext = createContext<FavoriteContextType>({
 });
 
 export const FavoriteProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [favorites, setFavorites] = useState<FavoriteContextType["favorites"]>(
-    {}
-  );
+  const [favorites, setFavorites] = useState<FavoriteContextType['favorites']>({});
 
   const setFavorite = useCallback(({ id, isFavorite }: SetFavotiteParams) => {
     setFavorites((prev) => {
@@ -42,9 +34,5 @@ export const FavoriteProvider: FC<PropsWithChildren> = ({ children }) => {
     });
   }, []);
 
-  return (
-    <FavoriteContext value={{ favorites, setFavorite }}>
-      {children}
-    </FavoriteContext>
-  );
+  return <FavoriteContext value={{ favorites, setFavorite }}>{children}</FavoriteContext>;
 };

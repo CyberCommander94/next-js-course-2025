@@ -1,5 +1,5 @@
-import { FC } from "react";
-import ProductCardSkeleton from "@/components/loaders/product-card-skeleton";
+import { FC } from 'react';
+import ProductCardSkeleton from '@/components/loaders/product-card-skeleton';
 
 type ProductsListLoaderProps = {
   amount: number;
@@ -15,6 +15,6 @@ const ProductsListLoader: FC<ProductsListLoaderProps> = ({ amount }) => {
       </div>
     </section>
   );
-}
+};
 
 export default ProductsListLoader;

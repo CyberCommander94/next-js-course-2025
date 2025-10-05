@@ -1,57 +1,19 @@
 import type { IRacket } from '@/types/shop-item';
 import type { IResponse } from '@/types/api';
-import { API_BASE_URL } from "@/constants"
-import { cookies } from "next/headers";
+import { API_BASE_URL } from '@/constants';
+import { cookies } from 'next/headers';
 
 export const getTop10Rackets = async () => {
   const cookieStore = await cookies();
 
   const res = await fetch(`${API_BASE_URL}/top-10`, {
-    method: "GET",
+    method: 'GET',
     headers: {
       Cookie: cookieStore.toString(),
     },
     next: {
-      tags: ["getTop10Rackets"],
-    }
-  });
-
-  if (!res.ok) {
-    return { isError: true, data: undefined };
-  }
-
-  const data: IRacket[] = await res.json();
-
-  return { isError: false, data };
-}
-
-type getRacketsParams = {
-  page?: number;
-  limit?: number;
-  brand?: string;
-}
-
-export const getRackets = async ({
-  page = 1,
-  limit = 2,
-  brand
-}: getRacketsParams): Promise<IResponse<IRacket[]>> => {
-  const cookieStore = await cookies();
-
-  const query = new URLSearchParams({
-    page: String(page),
-    limit: String(limit),
-    ...(brand ? { brand } : {})
-  });
-
-  const res = await fetch(`${API_BASE_URL}/products?${query.toString()}`, {
-    method: "GET",
-    headers: {
-      Cookie: cookieStore.toString(),
+      tags: ['getTop10Rackets'],
     },
-    next: {
-      tags: ["getRackets"],
-    }
   });
 
   if (!res.ok) {
@@ -63,15 +25,56 @@ export const getRackets = async ({
   return { isError: false, data };
 };
 
-export const getRacketById = async (id: string, credentials?: RequestCredentials): Promise<IResponse<IRacket>> => {
+type getRacketsParams = {
+  page?: number;
+  limit?: number;
+  brand?: string;
+};
+
+export const getRackets = async ({
+  page = 1,
+  limit = 2,
+  brand,
+}: getRacketsParams): Promise<IResponse<IRacket[]>> => {
   const cookieStore = await cookies();
 
-  const res = await fetch(`${API_BASE_URL}/product/${id}`, {
-    method: "GET",
+  const query = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+    ...(brand ? { brand } : {}),
+  });
+
+  const res = await fetch(`${API_BASE_URL}/products?${query.toString()}`, {
+    method: 'GET',
     headers: {
       Cookie: cookieStore.toString(),
     },
-    ...(credentials ? { credentials } : {})
+    next: {
+      tags: ['getRackets'],
+    },
+  });
+
+  if (!res.ok) {
+    return { isError: true, data: undefined };
+  }
+
+  const data: IRacket[] = await res.json();
+
+  return { isError: false, data };
+};
+
+export const getRacketById = async (
+  id: string,
+  credentials?: RequestCredentials,
+): Promise<IResponse<IRacket>> => {
+  const cookieStore = await cookies();
+
+  const res = await fetch(`${API_BASE_URL}/product/${id}`, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+    ...(credentials ? { credentials } : {}),
   });
 
   if (res.status === 404) {

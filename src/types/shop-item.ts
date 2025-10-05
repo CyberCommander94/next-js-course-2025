@@ -13,7 +13,7 @@ export interface IRacket {
   userData?: {
     isFavorite?: boolean;
   };
-};
+}
 
 export type Brand = {
   id: string | number;

@@ -1,8 +1,8 @@
-import { FC, PropsWithChildren } from "react";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import ScrollToTopButton from "@/components/scroll-to-top-button";
-import type { Theme } from "@/types/theme";
+import { FC, PropsWithChildren } from 'react';
+import Header from '@/components/header';
+import Footer from '@/components/footer';
+import ScrollToTopButton from '@/components/scroll-to-top-button';
+import type { Theme } from '@/types/theme';
 interface LayoutProps {
   initialTheme: Theme;
 }

@@ -1,5 +1,5 @@
-import { FC } from "react";
-import WaveBarsLoader from "@/components/loaders/wave-bars-loader";
+import { FC } from 'react';
+import WaveBarsLoader from '@/components/loaders/wave-bars-loader';
 
 const RacketPageLoader: FC = () => {
   return (

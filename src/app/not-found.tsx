@@ -1,10 +1,10 @@
-import { FC } from "react";
-import Link from "next/link";
-import { Metadata } from "next";
+import { FC } from 'react';
+import Link from 'next/link';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Tennis shop: 404",
-  description: "Запрашиваемая страница не найдена",
+  title: 'Tennis shop: 404',
+  description: 'Запрашиваемая страница не найдена',
 };
 
 const NotFound: FC = () => {
@@ -14,13 +14,16 @@ const NotFound: FC = () => {
         <section className="flex flex-col justify-center items-center w-full h-full text-center">
           <h2 className="text-4xl mb-4 font-light">404</h2>
           <p className="mb-6 font-light">Запрашиваемая страница не найдена</p>
-          <Link href="/" className="cursor-pointer font-light px-4 py-2 border border-foreground dark:border-input/50 bg-transparent hover:bg-foreground dark:hover:bg-input/30 text-foreground hover:text-background dark:hover:text-foreground">
+          <Link
+            href="/"
+            className="cursor-pointer font-light px-4 py-2 border border-foreground dark:border-input/50 bg-transparent hover:bg-foreground dark:hover:bg-input/30 text-foreground hover:text-background dark:hover:text-foreground"
+          >
             Вернуться на главную
           </Link>
         </section>
       </div>
     </div>
   );
-}
+};
 
 export default NotFound;

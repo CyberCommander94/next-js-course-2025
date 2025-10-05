@@ -1,11 +1,11 @@
-import { FC, Suspense } from "react";
-import Top10PageListLoader from "@/components/pages/rackets/top-10/loader";
-import Top10PageListContainer from "@/components/pages/rackets/top-10/container";
-import { Metadata } from "next";
+import { FC, Suspense } from 'react';
+import Top10PageListLoader from '@/components/pages/rackets/top-10/loader';
+import Top10PageListContainer from '@/components/pages/rackets/top-10/container';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Tennis shop: Топ 10",
-  description: "Топ 10 ракеток магазина Tennis shop",
+  title: 'Tennis shop: Топ 10',
+  description: 'Топ 10 ракеток магазина Tennis shop',
 };
 
 const Top10Rackets: FC = async () => {
@@ -21,6 +21,6 @@ const Top10Rackets: FC = async () => {
       </div>
     </div>
   );
-}
+};
 
 export default Top10Rackets;

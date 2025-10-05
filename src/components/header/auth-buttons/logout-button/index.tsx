@@ -1,14 +1,10 @@
-"use client";
+'use client';
 
-import { FC, useTransition } from "react";
-import { Button } from "@/components/ui/button"
+import { FC, useTransition } from 'react';
+import { Button } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
-import { userLogout } from "@/services/api/auth"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { userLogout } from '@/services/api/auth';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
   Dialog,
   DialogClose,
@@ -17,16 +13,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog';
 
 const LogoutButton: FC = () => {
   const [isPending, startTransition] = useTransition();
 
   const handleLogout = async () => {
     await userLogout();
-    
-    location.assign("/")
-  }
+
+    location.assign('/');
+  };
 
   return (
     <Dialog>
@@ -47,7 +43,13 @@ const LogoutButton: FC = () => {
           <DialogTitle className="font-light">Вы действительно хотите выйти с системы?</DialogTitle>
         </DialogHeader>
         <DialogFooter className="mt-2">
-          <Button variant="destructive" disabled={isPending} onClick={() => startTransition(handleLogout)}>Выйти с системы</Button>
+          <Button
+            variant="destructive"
+            disabled={isPending}
+            onClick={() => startTransition(handleLogout)}
+          >
+            Выйти с системы
+          </Button>
           <DialogClose asChild>
             <Button disabled={isPending}>Отменить</Button>
           </DialogClose>
@@ -55,6 +57,6 @@ const LogoutButton: FC = () => {
       </DialogContent>
     </Dialog>
   );
-}
+};
 
 export default LogoutButton;
