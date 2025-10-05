@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { UserPlus } from 'lucide-react';
 import { useActionState, useEffect } from 'react';
-import { signupAction } from '../../server-actions/signup';
+import { signupAction } from '@/server-actions/signup';
 import { LoginState } from '@/types/auth';
 import Link from 'next/link';
 

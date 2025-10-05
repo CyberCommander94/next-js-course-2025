@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { LogIn, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import { useActionState, useEffect } from 'react';
-import { loginAction } from '../../server-actions/login';
+import { loginAction } from '@/server-actions/login';
 import { LoginState } from '@/types/auth';
 
 const Login: FC = () => {

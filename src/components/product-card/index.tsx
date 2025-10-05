@@ -4,7 +4,7 @@ import { FC, use } from 'react';
 import type { IRacket } from '@/types/shop-item';
 import Link from 'next/link';
 import { UserContext } from '@/providers/user';
-import FavoriteButton from '../favorite-button';
+import FavoriteButton from '@/components/favorite-button';
 import Image from 'next/image';
 import { useHydrateFavorite, useIsFavoriteById } from '@/providers/favorite/hooks';
 
@@ -37,7 +37,7 @@ const ProductCard: FC<ProductCardProps> = ({ product, url }) => {
             iconSize={20}
           />
         )}
-        <Link href={url} className="max-h-[250px] h-full flex justify-center items-center">
+        <Link href={url} className="max-h-[250px] h-full w-full flex justify-center items-center">
           <Image
             src={product.imageUrl}
             alt={product.name}

@@ -1,8 +1,9 @@
 'use client';
 
 import { useSetIsFavorite } from '@/providers/favorite/hooks';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useState, use } from 'react';
 import { Bookmark } from 'lucide-react';
+import { ThemeContext } from '@/providers/theme';
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { toast } from 'sonner';
@@ -27,6 +28,7 @@ const handleFavorite = async ({
 };
 
 const FavoriteButton: FC<Props> = ({ isFavorite, productId, buttonClasses, iconSize }) => {
+  const { theme } = use(ThemeContext);
   const setFavorite = useSetIsFavorite();
   const [loading, setLoading] = useState(false);
 
@@ -84,8 +86,8 @@ const FavoriteButton: FC<Props> = ({ isFavorite, productId, buttonClasses, iconS
         <Bookmark
           strokeWidth={1}
           size={iconSize}
-          fill={isFavorite ? '#e7000b' : 'transparent'}
-          color="#e7000b"
+          fill={isFavorite ? (theme === 'light' ? '#e7000b' : '#ff6468') : 'transparent'}
+          color={theme === 'light' ? '#e7000b' : '#ff6468'}
           className={`cursor-pointer ${loading ? 'opacity-50 pointer-events-none' : ''}`}
         />
       </TooltipTrigger>

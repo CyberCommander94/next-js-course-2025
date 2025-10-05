@@ -4,6 +4,7 @@ import { FC, PropsWithChildren } from 'react';
 import Layout from '@/components/layout';
 import { cookies } from 'next/headers';
 import { FavoriteProvider } from '@/providers/favorite';
+import ThemeProvider from '@/providers/theme';
 
 const AppLayout: FC<PropsWithChildren> = async ({ children }) => {
   const { data } = await getUser();
@@ -12,9 +13,11 @@ const AppLayout: FC<PropsWithChildren> = async ({ children }) => {
 
   return (
     <UserProvider isAuthorized={data}>
-      <FavoriteProvider>
-        <Layout initialTheme={theme}>{children}</Layout>
-      </FavoriteProvider>
+      <ThemeProvider initialTheme={theme}>
+        <FavoriteProvider>
+          <Layout>{children}</Layout>
+        </FavoriteProvider>
+      </ThemeProvider>
     </UserProvider>
   );
 };
