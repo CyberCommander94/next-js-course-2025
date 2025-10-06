@@ -1,9 +1,9 @@
 import "@/assets/styles/globals.css";
 import { FC } from "react";
-import Layout from "@/components/layout";
 import { cookies } from "next/headers";
 import NextTopLoader from 'nextjs-toploader';
 import { Metadata } from "next";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Tennis shop",
@@ -19,7 +19,8 @@ const RootLayout: FC<Readonly<{children: React.ReactNode;}>
     <html lang='en' className={theme === "dark" ? "dark" : ""} data-scroll-behavior="smooth">
       <body className="grid [grid-template-rows:auto_1fr_auto] w-screen h-screen">
         <NextTopLoader color="#e7000b" showSpinner={false} shadow={false} height={4} />
-        <Layout initialTheme={theme}>{children}</Layout>
+        {children}
+        <Toaster />
       </body>
     </html>
   );

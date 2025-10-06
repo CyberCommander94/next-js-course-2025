@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { setThemeCookie } from "@/lib/actions";
+import { setThemeCookie } from "@/server-actions/theme";
 import type { Theme } from "@/types/theme";
 
 export const ThemeContext = React.createContext<{
