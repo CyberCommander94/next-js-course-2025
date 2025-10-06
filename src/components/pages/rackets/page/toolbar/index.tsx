@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
-import { FC } from "react";
-import type { Brand } from "@/types/shop-item"
+import { FC } from 'react';
+import type { Brand } from '@/types/shop-item';
 import {
   Select,
   SelectContent,
@@ -9,13 +9,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { useSearchParams, useRouter } from "next/navigation";
+} from '@/components/ui/select';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 type RacketsPageToolbarProps = {
   brands: Brand[];
   currentBrand: string;
-}
+};
 
 const RacketsPageToolbar: FC<RacketsPageToolbarProps> = ({ brands, currentBrand }) => {
   const router = useRouter();
@@ -23,10 +23,10 @@ const RacketsPageToolbar: FC<RacketsPageToolbarProps> = ({ brands, currentBrand 
 
   const onChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
-    if (value === "all") {
-      params.delete("brand");
+    if (value === 'all') {
+      params.delete('brand');
     } else {
-      params.set("brand", value);
+      params.set('brand', value);
     }
     router.push(`/rackets?${params.toString()}`);
   };
@@ -42,13 +42,17 @@ const RacketsPageToolbar: FC<RacketsPageToolbarProps> = ({ brands, currentBrand 
           <SelectGroup>
             <SelectItem value="all">Все бренды</SelectItem>
             {brands.map((br) => {
-              return <SelectItem key={br.id} value={String(br.name)}>{br.name}</SelectItem>
+              return (
+                <SelectItem key={br.id} value={String(br.name)}>
+                  {br.name}
+                </SelectItem>
+              );
             })}
           </SelectGroup>
         </SelectContent>
       </Select>
     </div>
   );
-}
+};
 
 export default RacketsPageToolbar;

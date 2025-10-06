@@ -1,27 +1,25 @@
-import { FC, Suspense } from "react";
-import RacketsPageListLoader from "@/components/pages/rackets/page/items-list/loader";
-import RacketsPageListContainer from "@/components/pages/rackets/page/items-list/container";
-import RacketsPageToolbarLoader from "@/components/pages/rackets/page/toolbar/loader";
-import RacketsPageToolbarContainer from "@/components/pages/rackets/page/toolbar/container";
-import { Metadata } from "next";
+import { FC, Suspense } from 'react';
+import RacketsPageListLoader from '@/components/pages/rackets/page/items-list/loader';
+import RacketsPageListContainer from '@/components/pages/rackets/page/items-list/container';
+import RacketsPageToolbarLoader from '@/components/pages/rackets/page/toolbar/loader';
+import RacketsPageToolbarContainer from '@/components/pages/rackets/page/toolbar/container';
+import { Metadata } from 'next';
 
 type Props = {
   searchParams: SearchParams;
-}
-
-export const metadata: Metadata = {
-  title: "Tennis shop: Ракетки",
-  description: "Список всех ракеток магазина Tennis shop",
 };
 
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+export const metadata: Metadata = {
+  title: 'Tennis shop: Ракетки',
+  description: 'Список всех ракеток магазина Tennis shop',
+};
+
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 const Rackets: FC<Props> = async ({ searchParams }) => {
   const params = await searchParams;
 
-  const brand = Array.isArray(params)
-    ? params[0]
-    : params.brand ?? "all";
+  const brand = Array.isArray(params) ? params[0] : (params.brand ?? 'all');
 
   return (
     <div className="w-full flex justify-center h-full">
@@ -38,6 +36,6 @@ const Rackets: FC<Props> = async ({ searchParams }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Rackets;

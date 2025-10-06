@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC } from 'react';
 import { Suspense } from 'react';
-import Top10RacketsListLoader from "@/components/pages/home/top-10-rackets-list/loader"
-import Top10RacketsListContainer from "@/components/pages/home/top-10-rackets-list/container"
-import HomePageRacketsListLoader from "@/components/pages/home/home-page-rackets-list/loader"
-import HomePageRacketsListContainer from "@/components/pages/home/home-page-rackets-list/container"
+import Top10RacketsListLoader from '@/components/pages/home/top-10-rackets-list/loader';
+import Top10RacketsListContainer from '@/components/pages/home/top-10-rackets-list/container';
+import HomePageRacketsListLoader from '@/components/pages/home/home-page-rackets-list/loader';
+import HomePageRacketsListContainer from '@/components/pages/home/home-page-rackets-list/container';
 
 const Home: FC = async () => {
   return (
@@ -25,6 +25,6 @@ const Home: FC = async () => {
       </div>
     </div>
   );
-}
+};
 
 export default Home;

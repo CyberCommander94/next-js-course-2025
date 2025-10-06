@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -132,12 +132,33 @@
 }
 
 @keyframes wave {
-  0%, 40%, 100% { transform: scaleY(1); }
-  20% { transform: scaleY(0.2); }
+  0%,
+  40%,
+  100% {
+    transform: scaleY(1);
+  }
+  20% {
+    transform: scaleY(0.2);
+  }
 }
 
-.wave-delay-0 { animation: wave 1s infinite ease-in-out 0ms; transform-origin: bottom; }
-.wave-delay-1 { animation: wave 1s infinite ease-in-out 150ms; transform-origin: bottom; }
-.wave-delay-2 { animation: wave 1s infinite ease-in-out 300ms; transform-origin: bottom; }
-.wave-delay-3 { animation: wave 1s infinite ease-in-out 450ms; transform-origin: bottom; }
-.wave-delay-4 { animation: wave 1s infinite ease-in-out 600ms; transform-origin: bottom; }
+.wave-delay-0 {
+  animation: wave 1s infinite ease-in-out 0ms;
+  transform-origin: bottom;
+}
+.wave-delay-1 {
+  animation: wave 1s infinite ease-in-out 150ms;
+  transform-origin: bottom;
+}
+.wave-delay-2 {
+  animation: wave 1s infinite ease-in-out 300ms;
+  transform-origin: bottom;
+}
+.wave-delay-3 {
+  animation: wave 1s infinite ease-in-out 450ms;
+  transform-origin: bottom;
+}
+.wave-delay-4 {
+  animation: wave 1s infinite ease-in-out 600ms;
+  transform-origin: bottom;
+}
