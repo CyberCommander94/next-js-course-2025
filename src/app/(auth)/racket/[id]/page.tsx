@@ -4,6 +4,7 @@ import { getMetaRacketById } from '@/services/api/meta/rackets';
 import { Metadata } from 'next';
 import { RacketContainer } from '@/components/pages/racket/container';
 import { SWRConfig } from 'swr';
+import { notFound } from 'next/navigation';
 
 interface RacketPageProps {
   params: Promise<{ id: string }>;
@@ -16,7 +17,7 @@ export const generateMetadata = async ({ params }: RacketPageProps): Promise<Met
 
   if (!data) {
     return {
-      title: 'Tennis Shop: Racket Page',
+      title: 'Tennis Shop: Racket Page'
     };
   }
 
@@ -28,6 +29,16 @@ export const generateMetadata = async ({ params }: RacketPageProps): Promise<Met
 
 const Racket: FC<RacketPageProps> = async ({ params }) => {
   const { id } = await params;
+
+    const { data: metadata, isError } = await getMetaRacketById(id);
+
+  if (isError) {
+    throw new Error("error");
+  }
+
+  if (!metadata) {
+    return notFound();
+  }
 
   const { data } = await getRacketById(id, 'include');
 

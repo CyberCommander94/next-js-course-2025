@@ -1,9 +1,10 @@
 import { FC, Suspense } from 'react';
-import RacketsPageListLoader from '@/components/pages/rackets/page/items-list/loader';
-import RacketsPageListContainer from '@/components/pages/rackets/page/items-list/container';
+import { RacketsPageListContainer } from '@/components/pages/rackets/page/items-list/container';
 import RacketsPageToolbarLoader from '@/components/pages/rackets/page/toolbar/loader';
 import RacketsPageToolbarContainer from '@/components/pages/rackets/page/toolbar/container';
 import { Metadata } from 'next';
+import { SWRConfig } from 'swr';
+import { getRackets } from "@/services/api/rackets";
 
 type Props = {
   searchParams: SearchParams;
@@ -18,8 +19,24 @@ type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 const Rackets: FC<Props> = async ({ searchParams }) => {
   const params = await searchParams;
+  const page = 1;
+  const limit = 12;
 
   const brand = Array.isArray(params) ? params[0] : (params.brand ?? 'all');
+
+  const requestParams = {
+    page,
+    limit,
+    ...(brand && brand !== 'all' ? { brand } : {}),
+  };
+
+  const { data } = await getRackets(requestParams);
+
+  const firstPageQuery = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+    ...(brand && brand !== 'all' ? { brand } : {}),
+  });
 
   return (
     <div className="w-full flex justify-center h-full">
@@ -30,9 +47,16 @@ const Rackets: FC<Props> = async ({ searchParams }) => {
         <Suspense fallback={<RacketsPageToolbarLoader />}>
           <RacketsPageToolbarContainer currentBrand={brand} />
         </Suspense>
-        <Suspense fallback={<RacketsPageListLoader />}>
+        <SWRConfig
+          value={{
+            fallback: {
+              [`products?${firstPageQuery.toString()}`]: [data],
+            },
+            revalidateOnFocus: false,
+          }}
+        >
           <RacketsPageListContainer currentBrand={brand} />
-        </Suspense>
+        </SWRConfig>
       </div>
     </div>
   );
