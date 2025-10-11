@@ -89,3 +89,23 @@ export const getRacketById = async (
 
   return { isError: false, data: data.product };
 };
+
+export const getRacketOgDataById = async ({
+  id,
+}: { id: string }): Promise<IResponse<IRacket>> => {
+  const result = await fetch(`${API_BASE_URL}/product/${id}`, {
+    cache: "force-cache",
+  });
+
+  if (result.status === 404) {
+    return { isError: false, data: undefined };
+  }
+
+  if (!result.ok) {
+    return { isError: true, data: undefined };
+  }
+
+  const data: { product: IRacket } = await result.json();
+
+  return { isError: false, data: data.product };
+};
