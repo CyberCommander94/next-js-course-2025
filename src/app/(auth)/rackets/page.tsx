@@ -5,10 +5,13 @@ import RacketsPageToolbarContainer from '@/components/pages/rackets/page/toolbar
 import { Metadata } from 'next';
 import { SWRConfig } from 'swr';
 import { getRackets } from "@/services/api/rackets";
+import { RACKETS_PAGE_ITEMS_LIMIT } from '@/constants';
 
 type Props = {
   searchParams: SearchParams;
 };
+
+const PAGE_NUMBER = 1;
 
 export const metadata: Metadata = {
   title: 'Tennis shop: Ракетки',
@@ -19,22 +22,20 @@ type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 const Rackets: FC<Props> = async ({ searchParams }) => {
   const params = await searchParams;
-  const page = 1;
-  const limit = 12;
 
   const brand = Array.isArray(params) ? params[0] : (params.brand ?? 'all');
 
   const requestParams = {
-    page,
-    limit,
+    PAGE_NUMBER,
+    RACKETS_PAGE_ITEMS_LIMIT,
     ...(brand && brand !== 'all' ? { brand } : {}),
   };
 
   const { data } = await getRackets(requestParams);
 
   const firstPageQuery = new URLSearchParams({
-    page: String(page),
-    limit: String(limit),
+    page: String(PAGE_NUMBER),
+    limit: String(RACKETS_PAGE_ITEMS_LIMIT),
     ...(brand && brand !== 'all' ? { brand } : {}),
   });
 

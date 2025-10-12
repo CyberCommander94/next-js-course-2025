@@ -4,15 +4,13 @@ import { FC, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import { useInView } from 'react-intersection-observer';
 import RacketsPageList from '@/components/pages/rackets/page/items-list';
-import { API_BASE_URL } from '@/constants';
+import { API_BASE_URL, RACKETS_PAGE_ITEMS_LIMIT } from '@/constants';
 import { IRacket } from '@/types/shop-item';
 import RacketsPageListLoader from './loader';
 
 type Props = {
   currentBrand: string;
 };
-
-const PAGE_LIMIT = 12;
 
 const fetcher = async (url: string): Promise<IRacket[]> => {
   const res = await fetch(`${API_BASE_URL}/${url}`, { credentials: 'include' });
@@ -31,7 +29,7 @@ export const RacketsPageListContainer: FC<Props> = ({ currentBrand }) => {
 
     const query = new URLSearchParams({
       page: String(pageIndex + 1),
-      limit: String(PAGE_LIMIT),
+      limit: String(RACKETS_PAGE_ITEMS_LIMIT),
       ...(currentBrand && currentBrand !== 'all' ? { brand: currentBrand } : {}),
     });
 
@@ -45,7 +43,7 @@ export const RacketsPageListContainer: FC<Props> = ({ currentBrand }) => {
 
   const rackets: IRacket[] = data ? data.flat() : [];
 
-  const hasMore = data && data[data.length - 1]?.length === PAGE_LIMIT;
+  const hasMore = data && data[data.length - 1]?.length === RACKETS_PAGE_ITEMS_LIMIT;
 
   useEffect(() => {
     if (inView && !isValidating && hasMore) {
