@@ -28,26 +28,27 @@ const RacketsPageToolbar: FC<RacketsPageToolbarProps> = ({ brands, currentBrand 
     } else {
       params.set('brand', value);
     }
-    router.push(`/rackets?${params.toString()}`);
+
+    router.replace(`/rackets?${params.toString()}`, { scroll: false });
   };
 
   return (
     <div className="w-full flex justify-end items-center mb-2 gap-3">
-      <p className="font-light">Бренд: </p>
+      <p className="font-light">Бренд:</p>
+
       <Select value={currentBrand} onValueChange={onChange}>
-        <SelectTrigger className="w-[180px]" size={'sm'}>
+        <SelectTrigger className="w-[180px]" size="sm" disabled={!brands.length}>
           <SelectValue placeholder="Выберите бренд" />
         </SelectTrigger>
+
         <SelectContent>
           <SelectGroup>
             <SelectItem value="all">Все бренды</SelectItem>
-            {brands.map((br) => {
-              return (
-                <SelectItem key={br.id} value={String(br.name)}>
-                  {br.name}
-                </SelectItem>
-              );
-            })}
+            {brands.map((br) => (
+              <SelectItem key={br.id} value={String(br.name)}>
+                {br.name}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>

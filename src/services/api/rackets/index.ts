@@ -1,6 +1,6 @@
 import type { IRacket } from '@/types/shop-item';
 import type { IResponse } from '@/types/api';
-import { API_BASE_URL } from '@/constants';
+import { API_BASE_URL, RACKETS_PAGE_ITEMS_LIMIT, REVALIDATE_RACKETS_TAG, REVALIDATE_TOP_10_TAG } from '@/constants';
 import { cookies } from 'next/headers';
 
 export const getTop10Rackets = async () => {
@@ -12,7 +12,7 @@ export const getTop10Rackets = async () => {
       Cookie: cookieStore.toString(),
     },
     next: {
-      tags: ['getTop10Rackets'],
+      tags: [REVALIDATE_TOP_10_TAG],
     },
   });
 
@@ -33,7 +33,7 @@ type getRacketsParams = {
 
 export const getRackets = async ({
   page = 1,
-  limit = 2,
+  limit = RACKETS_PAGE_ITEMS_LIMIT,
   brand,
 }: getRacketsParams): Promise<IResponse<IRacket[]>> => {
   const cookieStore = await cookies();
@@ -50,7 +50,7 @@ export const getRackets = async ({
       Cookie: cookieStore.toString(),
     },
     next: {
-      tags: ['getRackets'],
+      tags: [REVALIDATE_RACKETS_TAG],
     },
   });
 
@@ -86,6 +86,26 @@ export const getRacketById = async (
   }
 
   const data: { product: IRacket } = await res.json();
+
+  return { isError: false, data: data.product };
+};
+
+export const getRacketOgDataById = async ({
+  id,
+}: { id: string }): Promise<IResponse<IRacket>> => {
+  const result = await fetch(`${API_BASE_URL}/product/${id}`, {
+    cache: "force-cache",
+  });
+
+  if (result.status === 404) {
+    return { isError: false, data: undefined };
+  }
+
+  if (!result.ok) {
+    return { isError: true, data: undefined };
+  }
+
+  const data: { product: IRacket } = await result.json();
 
   return { isError: false, data: data.product };
 };
